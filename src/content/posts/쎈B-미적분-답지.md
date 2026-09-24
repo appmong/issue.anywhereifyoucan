@@ -1,7 +1,7 @@
 ---
 title: "쎈B 미적분 답지, 최신 정보와 사용 후기"
 description: "쎈B 미적분 답지 최신 버전의 문제 유형과 해설 변화, 실전 활용도, 장단점과 추천 대상을 정리했어요."
-category: edu
+category: life
 author: editor
 publishDate: 2026-09-10
 status: 상시

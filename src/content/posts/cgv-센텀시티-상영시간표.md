@@ -1,7 +1,7 @@
 ---
 title: "CGV 센텀시티 상영시간표 확인 및 주차 이용 가이드"
 description: "CGV 부산 센텀시티 실시간 상영시간표 확인법, 특별관 라인업, 주차 무료 혜택과 무인 정산 팁, 영업시간 외 입장법을 정리했어요."
-category: movie
+category: entertainment
 author: editor
 publishDate: 2026-09-10
 status: 상시

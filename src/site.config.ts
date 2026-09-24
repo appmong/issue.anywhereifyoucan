@@ -117,19 +117,24 @@ export interface Category {
   emoji: string;
 }
 
+// ⚠️ 이 목록은 서버 DB의 `category` 테이블(최종 기준)과 slug·정렬이 일치해야 함.
+//    포스트 생성·키워드 분류 등 전 시스템이 이 카테고리로 정의됨. 임의 추가/변경 금지.
+//    (DB: id→slug  1 support · 2 finance · 3 invest · 4 welfare · 5 jobs · 6 travel ·
+//         7 health · 8 tech · 9 business · 10 entertainment · 11 fortune · 12 life · 99 etc)
 export const CATEGORIES: Category[] = [
-  { slug: "support", name: "정부지원금", description: "몰라서 못 받는 지원금을 챙겨요.", emoji: "💸" },
-  { slug: "tax", name: "세금", description: "몰라서 더 내는 세금을 줄여요.", emoji: "🧾" },
-  { slug: "law", name: "생활법률", description: "일상에서 걸리는 법 문제를 풀어요.", emoji: "⚖️" },
-  { slug: "finance", name: "금융", description: "대출·이자·연말정산을 정리해요.", emoji: "🏦" },
-  { slug: "realty", name: "부동산", description: "전월세·청약·등기 실무를 다뤄요.", emoji: "🏠" },
-  { slug: "car", name: "자동차", description: "구매·보험·과태료를 확인해요.", emoji: "🚗" },
-  { slug: "child", name: "육아", description: "출산·보육 지원을 챙겨요.", emoji: "🍼" },
-  { slug: "pension", name: "연금", description: "국민·퇴직·개인연금을 계산해요.", emoji: "👛" },
-  // ── 이슈/생활 니치 (블로그스팟 이전분 + 추후 확장). 브랜딩 단계에서 재정리 예정 ──
-  { slug: "living", name: "생활", description: "고객센터·생활정보를 정리해요.", emoji: "🏡" },
-  { slug: "movie", name: "영화", description: "상영시간표·극장 정보를 확인해요.", emoji: "🎬" },
-  { slug: "edu", name: "교육", description: "교재·학습 자료를 정리해요.", emoji: "📚" },
+  { slug: "support", name: "고객센터/AS/지점", description: "고객센터·AS 접수와 지점 정보를 정리해요.", emoji: "📞" },
+  { slug: "finance", name: "금융", description: "대출·이자·연말정산·카드 등 금융상품 정보를 정리해요.", emoji: "🏦" },
+  { slug: "invest", name: "재테크", description: "주식·펀드·부동산 등 자산 관리 정보를 정리해요.", emoji: "📈" },
+  { slug: "welfare", name: "정부/복지", description: "정책 지원·지원금·세금·복지 신청 정보를 챙겨요.", emoji: "🏛️" },
+  { slug: "jobs", name: "취업/일자리", description: "아르바이트·자격증·채용 정보를 정리해요.", emoji: "💼" },
+  { slug: "travel", name: "교통/여행", description: "교통·숙소·여행에 필요한 정보를 정리해요.", emoji: "🚆" },
+  { slug: "health", name: "건강/의학", description: "증상·건강관리·의료 정보를 정리해요.", emoji: "🩺" },
+  { slug: "tech", name: "IT/디지털", description: "앱·프로그램·오류 해결 등 디지털 정보를 정리해요.", emoji: "💻" },
+  { slug: "business", name: "비즈니스/서식", description: "사업자·서식·신청 등 실무 정보를 정리해요.", emoji: "📋" },
+  { slug: "entertainment", name: "방송/연예", description: "편성표·상영시간표·이슈 등 연예 정보를 정리해요.", emoji: "📺" },
+  { slug: "fortune", name: "운세", description: "운세·사주·타로 정보를 정리해요.", emoji: "🔮" },
+  { slug: "life", name: "생활/정보", description: "자동차·생활·교육 등 알아두면 좋은 정보를 정리해요.", emoji: "🏡" },
+  { slug: "etc", name: "미분류", description: "분류 전 임시 보관함.", emoji: "🗂️" },
 ];
 
 export const CATEGORY_MAP: Record<string, Category> = Object.fromEntries(

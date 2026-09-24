@@ -1,7 +1,7 @@
 ---
 title: "한경희 생활과학 AS, A/S 접수 방법과 고객센터 정보"
 description: "한경희 생활과학 A/S 접수 방법, 고객센터 전화번호와 운영시간, 택배 접수 절차와 유의사항을 정리했어요."
-category: living
+category: support
 author: editor
 publishDate: 2026-09-10
 status: 상시

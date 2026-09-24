@@ -1,7 +1,7 @@
 ---
 title: "워드마스터 고등basic 효율적인 고등학생 어휘 학습법"
 description: "수능 대비 어휘 학습서 워드마스터 고등basic의 개요와 제공 자료, 학습 도구와 사용 방법을 정리했어요."
-category: edu
+category: life
 author: editor
 publishDate: 2026-09-10
 status: 상시
