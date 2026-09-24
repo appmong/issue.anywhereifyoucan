@@ -95,6 +95,9 @@ const jsonld = {
       />
     </header>
 
+    {/* 제목 바로 아래 광고 (before_content) */}
+    <AdUnit />
+
     <DeadlineWidget status={data.status} deadline={data.deadline} />
 
     <TldrCard items={data.tldr} />
@@ -112,9 +115,6 @@ const jsonld = {
     )}
 
     <Toc headings={headings} />
-
-    {/* 본문 시작 광고 (before_content) */}
-    <AdUnit />
 
     <div class="prose">
       <slot />
