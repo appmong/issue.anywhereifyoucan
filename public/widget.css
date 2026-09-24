@@ -71,9 +71,9 @@
 
 /* 썸네일 */
 .tbw-thumb {
-  flex: 0 0 128px;
-  width: 128px;
-  aspect-ratio: 16 / 10;
+  flex: 0 0 140px;
+  width: 140px;
+  aspect-ratio: 3 / 2;
   background: #f2f2f2 no-repeat center/cover;
   overflow: hidden;
 }
@@ -134,7 +134,7 @@
   .tbw-thumb {
     flex: none;
     width: 100%;
-    aspect-ratio: 16 / 9;
+    aspect-ratio: 3 / 2;
   }
   .tbw-body { padding: 12px 14px 14px; }
   .tbw-title { font-size: 15px; -webkit-line-clamp: 2; }
