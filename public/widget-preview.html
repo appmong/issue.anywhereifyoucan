@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>위젯 미리보기 (WP 포스트 하단 시뮬레이션)</title>
+  <style>
+    body { margin: 0; background: #f6f7f9; color: #222;
+      font-family: -apple-system, BlinkMacSystemFont, "Malgun Gothic", sans-serif; }
+    .wrap { max-width: 760px; margin: 0 auto; padding: 24px 16px 80px; }
+    .mock-article { background:#fff; border:1px solid #ececec; border-radius:12px;
+      padding: 28px 24px; }
+    .mock-article h1 { font-size: 24px; margin: 0 0 12px; }
+    .mock-article p { line-height: 1.8; color:#444; }
+    .divider { margin: 32px 0 8px; border-top: 1px dashed #cfcfcf; }
+    .note { font-size: 12px; color:#999; text-align:center; margin: 40px 0 8px; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <article class="mock-article">
+      <h1>여기는 워드프레스 포스트 본문입니다</h1>
+      <p>이 페이지는 5개 WP 사이트 포스트 하단에 위젯이 어떻게 붙는지 확인하기 위한
+         시뮬레이션입니다. 아래 점선 밑부터가 실제 위젯(widget.js)이 렌더한 영역이에요.</p>
+      <p>실제 WP에서는 the_content 필터 끝에 아래 스니펫 한 줄만 넣으면 됩니다.</p>
+      <div class="divider"></div>
+    </article>
+
+    <!-- ▼▼▼ 실제 삽입 스니펫 (WP에도 이대로) ▼▼▼ -->
+    <div id="tbw-widget"></div>
+    <script src="/widget.js"
+            data-container="tbw-widget"
+            data-title="함께 보면 좋은 글"
+            data-max="10"
+            data-shuffle="false"></script>
+    <!-- ▲▲▲ -->
+
+    <p class="note">↑ 위젯 영역 (recommends.json 기반 자동 렌더)</p>
+  </div>
+</body>
+</html>

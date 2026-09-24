@@ -1,0 +1,117 @@
+타볼라처럼 스크립트 광고처럼 내포스트중 고단가나이슈포스트를 포스트하단에10개정도나오게만들어주고싶어 워프사이트가5개정도인데 모두다이스크립트로 포스팅하단에 함께보면좋은글처럼나오게하고싶어. 깃헙 클라우드플래어를이용해서하면좋을것같은데. 여기에보여줄포스트는내가정리하거나 url을 정리해서 파일이나 무엇인가로 넣어주면될것같거든? 미리 html형태로 썸네일과제목 og데이터읽어서두는게좋을까? 이런분야 서툴러서 니가설계 계획좀해봐
+
+A 방식으로 만들겠습니다. 먼저 스킬 확인하고 코드 작성할게요.
+
+명령 2개 실행함, 파일 생성됨, 파일 공유함
+완성했습니다. Python 3.8 호환, GitPython 없이 git은 subprocess로 처리했습니다.
+
+이 프로그램이 하는 일
+저장소 폴더 지정 (git repo 로컬 폴더)
+에디터에 URL 라인 입력 — url | 태그 | 우선순위 (태그·우선순위 생략 가능, #은 주석)
+파싱 + JSON 생성 버튼 → 각 URL의 OG 파싱 → og:image 다운로드·리사이즈해서 thumbs/에 저장 → recommends.json 전체 교체 저장
+Git 푸시 버튼 (또는 자동 푸시 체크) → add → commit → push
+기존 JSON 불러오기 → 에디터로 복원 (A 방식이라 이게 있어야 편함)
+준비물 (로컬 PC)
+pip install PyQt5 requests beautifulsoup4 pillow
+git은 미리 한 번만 세팅:
+
+cd 저장소폴더
+git init
+git remote add origin https://github.com/사용자/저장소.git
+git branch -M main
+# 인증: PAT 토큰 방식 권장 (푸시 시 자동 인증 되게 credential 저장)
+git config credential.helper store
+몇 가지 참고
+썸네일 파일명은 URL 해시 기반이라 같은 URL은 항상 같은 파일로 덮어써집니다 (중복 안 쌓임). A 방식이라 목록에서 뺀 URL의 썸네일은 thumbs/에 남는데, 신경 쓰이면 나중에 "고아 썸네일 정리" 기능 넣어드릴게요.
+인코딩 보정 넣어놔서 네이버·티스토리 등 한글 페이지 제목 깨짐 방지됩니다.
+OG 파싱은 워커 스레드라 URL 많아도 UI 안 멈춥니다.
+다음은 widget.js + widget.css + _headers 세트, 그리고 Cloudflare Pages 배포 순서입니다. 이어서 만들까요?
+
+
+Taboola widget manager
+PY 
+GitPython  최대한 라이브러리 많이쓰는거 써서 안전하게하자
+
+GitPython 쓰는 게 subprocess보다 예외 처리와 상태 확인이 훨씬 안전합니다. 그 버전으로 git 부분을 교체하겠습니다.
+
+명령 4개 실행함, 파일 수정됨, 파일 공유함
+GitPython 기반으로 교체 완료했습니다.
+
+subprocess 대비 개선점
+저장소 유효성 — InvalidGitRepositoryError, bare 저장소, detached HEAD 각각 구분해서 안내
+변경 감지 — is_dirty(untracked_files=True)로 변경 없으면 빈 커밋 안 만들고 스킵. 수정/신규 파일 목록도 로그에 표시
+push 결과 해석 — 플래그로 성공/에러/거부를 판별. 특히 원격이 앞선 경우(REJECTED) "git pull 먼저 필요"라고 정확히 알려줌
+upstream 자동 설정 — 첫 푸시도 set_upstream=True로 처리
+인증 실패 — GitCommandError의 stderr를 잡아 원인 표시
+설치 (로컬 PC)
+pip install PyQt5 requests beautifulsoup4 pillow gitpython
+git 최초 세팅은 동일합니다:
+
+cd 저장소폴더
+git init
+git remote add origin https://github.com/사용자/저장소.git
+git branch -M main
+git config credential.helper store   # PAT 토큰 한 번 저장하면 이후 자동
+한 가지 참고: GitPython도 실제 push 인증은 시스템 git credential을 그대로 씁니다. 그래서 최초 1회 수동 push로 PAT 토큰을 credential store에 저장해두면, 이후 프로그램에서 자동 푸시됩니다.
+
+다음은 widget.js + widget.css + _headers, Cloudflare Pages 배포 순서입니다. 이어서 만들까요?
+
+
+Taboola widget manager
+PY 
+좋아 어어서시작하자. Ui는 모바일 기준으로하자 url은 1개가들어갈수도있어. 가능하면 pc / mobile 나오면더좋겠네 기본적인 구조나스타일은 타볼라참고?
+
+widget.js + widget.css + _headers 만들겠습니다. 타볼라 스타일(썸네일 카드 + 제목 + 스폰서 태그) 참고하고, 모바일 우선에 PC 반응형까지 넣겠습니다. URL 1개만 있어도 깨지지 않게 처리하고요.
+
+먼저 타볼라 실제 레이아웃을 잠깐 확인하겠습니다.
+
+An annotated screenshot of a Taboola widget on nbcnews.com, showing the ...
+researchgate
+Can You Spot the Ad: The Atlantic
+truthinadvertising
+What Is Content Recommendation? | Taboola.com - EN
+taboola
+웹 검색 결과
+타볼라 핵심 패턴 확인했습니다: 썸네일 위 / 제목 아래 / 작은 태그 라벨, 카드가 그리드로 반복. 이걸 반영하겠습니다.
+
+widget.css부터:
+
+3개의 파일 생성됨, 명령 2개 실행함, 파일 공유함
+3개 파일 완성했습니다. 저장소 폴더에 그대로 넣으면 됩니다.
+
+반응형 동작 (타볼라 스타일)
+모바일(~600px): 1열, 가로형 카드 (썸네일 좌 + 제목 우) — 스크롤 짧게
+태블릿(600~900px): 2열, 세로형 카드 (썸네일 위 + 제목 아래)
+PC(900px+): 3열, 1200px+: 4열
+검증 완료: 우선순위 정렬 / 썸네일 없어도 렌더 / URL 1개면 좁게 표시 / XSS 방어 / 다크모드 대응
+코드스니펫 삽입 (5개 사이트 동일)
+WP 포스트 하단 후크에 넣을 코드:
+
+html
+<div id="tbw-widget"></div>
+<script src="https://당신프로젝트.pages.dev/widget.js"
+        data-container="tbw-widget"
+        data-title="함께 보면 좋은 글"
+        data-max="10"
+        data-shuffle="false"></script>
+옵션 설명:
+
+data-max — 노출 개수 (10)
+data-shuffle="true" — 매 로드 랜덤 (같은 방문자에게 다양하게 보이고 싶을 때)
+data-title — 헤더 문구
+CSS는 widget.js가 자동으로 불러오므로 별도 link 태그 불필요
+Code Snippets 플러그인이면 이 코드를 the_content 필터에 붙이는 PHP 스니펫으로 감싸야 합니다:
+
+php
+add_filter('the_content', function($content){
+    if (is_single() && in_the_loop() && is_main_query()) {
+        $widget = '<div id="tbw-widget"></div>'
+            . '<script src="https://당신프로젝트.pages.dev/widget.js" '
+            . 'data-container="tbw-widget" data-title="함께 보면 좋은 글" '
+            . 'data-max="10"></script>';
+        return $content . $widget;
+    }
+    return $content;
+});
+다음: Cloudflare Pages 배포
+GitHub 저장소 생성 → Cloudflare Pages 연결 → 도메인까지 순서대로 정리해드릴까요? 아니면 먼저 로컬에서 테스트해볼 수 있게 미리보기 HTML 하나 만들어드릴까요?

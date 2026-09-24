@@ -1,0 +1,19 @@
+# Cloudflare Pages 캐시 정책
+# JSON: 자주 바뀌므로 짧게 (5분) — 업데이트 반영 빠르게
+/recommends.json
+  Cache-Control: public, max-age=300, must-revalidate
+  Access-Control-Allow-Origin: *
+
+# widget.js / widget.css: 가끔 수정 — 10분
+/widget.js
+  Cache-Control: public, max-age=600
+  Access-Control-Allow-Origin: *
+
+/widget.css
+  Cache-Control: public, max-age=600
+  Access-Control-Allow-Origin: *
+
+# 썸네일: 파일명 해시 기반이라 오래 캐시 OK (7일)
+/thumbs/*
+  Cache-Control: public, max-age=604800, immutable
+  Access-Control-Allow-Origin: *
