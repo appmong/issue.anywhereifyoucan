@@ -11,6 +11,7 @@ import AuthorBox from "../components/AuthorBox.astro";
 import RelatedPosts from "../components/RelatedPosts.astro";
 import ReadingProgress from "../components/ReadingProgress.astro";
 import SubscribeBox from "../components/SubscribeBox.astro";
+import AdUnit from "../components/AdUnit.astro";
 import { AUTHORS, CATEGORY_MAP, DISCLAIMERS, SITE } from "../site.config";
 import { categoryUrl, postUrl, isoDate } from "../lib/utils";
 
@@ -112,9 +113,15 @@ const jsonld = {
 
     <Toc headings={headings} />
 
+    {/* 본문 시작 광고 (before_content) */}
+    <AdUnit />
+
     <div class="prose">
       <slot />
     </div>
+
+    {/* 본문 끝 광고 (after_content) */}
+    <AdUnit />
 
     <p class="disclaimer">{disclaimerText}</p>
 

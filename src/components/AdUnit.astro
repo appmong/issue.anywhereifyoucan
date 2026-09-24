@@ -1,0 +1,37 @@
+---
+// 애드센스 고정(디스플레이) 광고 단위
+// - 로더 스크립트(adsbygoogle.js)는 BaseLayout에서 전역 1회 로드됨 → 여기선 <ins>+push만
+// - ADSENSE.clientId가 비어있으면 아무것도 렌더 안 함 (승인 전/미설정 안전)
+import { ADSENSE } from "../site.config";
+
+interface Props {
+  /** 광고 슬롯 ID. 기본값은 config의 본문용 슬롯 */
+  slot?: string;
+  /** 여백 라벨용(선택) */
+  label?: string;
+}
+const { slot = ADSENSE.slotInArticle } = Astro.props;
+const client = ADSENSE.clientId;
+---
+
+{client && slot && (
+  <div class="ad-unit">
+    <ins
+      class="adsbygoogle"
+      style="display:block"
+      data-ad-client={client}
+      data-ad-slot={slot}
+      data-ad-format="auto"
+      data-full-width-responsive="true"
+    ></ins>
+    <script is:inline set:html={`(adsbygoogle = window.adsbygoogle || []).push({});`}></script>
+  </div>
+)}
+
+<style>
+  .ad-unit {
+    text-align: center;
+    margin: 24px 0;
+    min-height: 1px; /* 광고 미로드 시 레이아웃 흔들림 최소화 */
+  }
+</style>

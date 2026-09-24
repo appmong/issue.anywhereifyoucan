@@ -24,7 +24,7 @@ export const SITE = {
 // ─────────────────────────────────────────────────────────────
 export const VERIFICATION = {
   google: "", // Search Console 메타 인증 content 값
-  naver: "", // 네이버 웹마스터도구 content 값
+  naver: "e1f6c986c5654e1ef1cd834364777d4246d0fdae", // 네이버 웹마스터도구 content 값
 } as const;
 
 // ─────────────────────────────────────────────────────────────
@@ -32,7 +32,9 @@ export const VERIFICATION = {
 // ─────────────────────────────────────────────────────────────
 export const ADSENSE = {
   /** ca-pub-XXXXXXXXXXXXXXXX (승인 신청 시 발급). 비우면 스크립트/ads.txt 미삽입 */
-  clientId: "",
+  clientId: "ca-pub-8144619202927627",
+  /** 본문 전/후 고정 광고 슬롯 ID (디스플레이 광고 단위) */
+  slotInArticle: "5698455520",
 } as const;
 
 // ─────────────────────────────────────────────────────────────
@@ -40,7 +42,7 @@ export const ADSENSE = {
 // ─────────────────────────────────────────────────────────────
 export const ANALYTICS = {
   /** 네이버 애널리틱스(웹로그분석) wa 값 */
-  naver: "",
+  naver: "1c7cb46b59eaeb0",
   /** 구글 애널리틱스(GA4) 측정 ID (G-XXXXXXXXXX) */
   google: "",
 } as const;
