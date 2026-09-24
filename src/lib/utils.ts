@@ -35,9 +35,9 @@ export function estimateMinutes(body: string | undefined): number {
   return Math.max(1, Math.round(chars / 500));
 }
 
-/** 카테고리 슬러그 + 글 id → URL (trailingSlash: always) */
-export function postUrl(category: string, id: string): string {
-  return `/${category}/${id}/`;
+/** 글 id → URL. 플랫 구조: /{슬러그}/ (카테고리는 URL에 넣지 않음, trailingSlash: always) */
+export function postUrl(_category: string, id: string): string {
+  return `/${id}/`;
 }
 
 export function categoryUrl(category: string): string {

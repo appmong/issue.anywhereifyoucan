@@ -1,6 +1,6 @@
 ---
 import { getCollection, render } from "astro:content";
-import PostLayout from "../../layouts/PostLayout.astro";
+import PostLayout from "../layouts/PostLayout.astro";
 
 export async function getStaticPaths() {
   const posts = (await getCollection("posts")).filter((p) => !p.data.draft);
@@ -20,7 +20,7 @@ export async function getStaticPaths() {
     }));
 
     return {
-      params: { category: post.data.category, slug: post.id },
+      params: { slug: post.id },
       props: { post, related },
     };
   });
