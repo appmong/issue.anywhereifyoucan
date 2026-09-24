@@ -17,8 +17,8 @@
   var script = document.currentScript;
   var BASE = script.src.replace(/\/[^\/]*$/, "");   // widget.js가 있는 폴더 = 저장소 루트
   var containerId = (script.dataset.container || "tbw-widget");
-  var headTitle = (script.dataset.title || "함께 보면 좋은 글");
-  var maxItems = parseInt(script.dataset.max || "10", 10);
+  var headTitle = (script.dataset.title || "🔥 지금 핫한 이 정보, 절대 놓치지 마세요");
+  var maxItems = parseInt(script.dataset.max || "6", 10);
   var shuffle = (script.dataset.shuffle || "false") === "true";
 
   // 캐시 우회용 버전 (날짜 단위) — Cloudflare 캐시 반영 지연 완화
@@ -72,16 +72,12 @@
       ? '<div class="tbw-thumb"><img src="' + esc(thumb) +
         '" loading="lazy" alt=""></div>'
       : '<div class="tbw-thumb"></div>';
-    var tagHtml = p.tag
-      ? '<span class="tbw-tag">' + esc(p.tag) + "</span>" : "";
     var descHtml = p.desc
       ? '<p class="tbw-desc">' + esc(p.desc) + "</p>" : "";
     return '' +
-      '<a class="tbw-card" href="' + esc(p.url) +
-      '" target="_blank" rel="noopener">' +
+      '<a class="tbw-card" href="' + esc(p.url) + '" target="_self">' +
         thumbHtml +
         '<div class="tbw-body">' +
-          tagHtml +
           '<p class="tbw-title">' + esc(p.title) + "</p>" +
           descHtml +
         "</div>" +
@@ -100,7 +96,6 @@
       '<div class="tbw-root">' +
         '<div class="tbw-head">' +
           "<h3>" + esc(headTitle) + "</h3>" +
-          '<span class="tbw-brand">AD</span>' +
         "</div>" +
         '<div class="tbw-grid' + singleClass + '">' +
           picked.map(cardHtml).join("") +
