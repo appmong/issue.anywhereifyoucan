@@ -18,6 +18,7 @@
   box-sizing: border-box;
   width: 100%;
   margin: 24px 0;
+  color-scheme: light;   /* 호스트/기기 다크모드 영향 차단 */
   font-family: -apple-system, BlinkMacSystemFont, "Malgun Gothic",
                "맑은 고딕", "Apple SD Gothic Neo", sans-serif;
 }
@@ -151,15 +152,4 @@
   .tbw-grid { grid-template-columns: repeat(3, 1fr); }
 }
 
-/* 다크모드 대응 (선택) */
-@media (prefers-color-scheme: dark) {
-  .tbw-root {
-    --tbw-title-color: #eaeaea;
-    --tbw-card-bg: #1c1c1e;
-    --tbw-border: #2c2c2e;
-    --tbw-head-color: #f0f0f0;
-    --tbw-shadow: 0 1px 4px rgba(0,0,0,0.4);
-    --tbw-shadow-hover: 0 4px 14px rgba(0,0,0,0.6);
-  }
-  .tbw-desc { color: #9a9a9a; }
-}
+/* 다크모드 자동전환 제거 — 방문자 기기 설정과 무관하게 항상 밝은 톤 고정 */
